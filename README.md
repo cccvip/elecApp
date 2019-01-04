@@ -7,6 +7,11 @@ electron+springBoot简单使用
 
 > 开源项目electron [官网地址](https://electronjs.org/)
 
+### 启动项目
+- cd elec
+- npm clean-install
+- npm start
+
 ## SpringBoot
 
 > 方便快速的Spring全家桶项目
