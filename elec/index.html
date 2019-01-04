@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+</head>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" crossorigin="anonymous">
+<!-- Insert this line above script imports  -->
+<script>if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}</script>
+<!-- normal script imports etc  -->
+<script src="scripts/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!-- Insert this line after script imports -->
+<script>if (window.module) module = window.module;</script>
+<style>
+    body {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-align: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+</style>
+<body class="text-center">
+<form class="form-signin" onsubmit="return false" action="##">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
+         height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <span id="alertMesg"></span>
+    <label for="username" class="sr-only">UserName</label>
+    <input type="name" id="username" class="form-control" placeholder="username" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</form>
+</body>
+<script>
+    var request = require('request');
+    const shell = require('electron').shell
+
+    function xx() {
+        shell.openExternal('http://localhost:9090/admin')
+    }
+
+    function show() {
+        document.getElementById("show").style.display = "";
+    }
+
+    var suc = '  <div class="alert alert-success alert-dismissable" id="loginSuc">' +
+        '        login Success ' +
+        '        <button type="button" class="close" data-dismiss="alert" ' +
+        '                aria-hidden="false"> ' +
+        '            &times;' +
+        '        </button> ' +
+        '    </div>'
+    var fai = '   <div class="alert alert-danger alert-dismissable" id="loginFai">' +
+        '        login fail ' +
+        '        <button type="button" class="close" data-dismiss="alert" ' +
+        '                aria-hidden="false"> ' +
+        '            &times; ' +
+        '        </button>' +
+        '    </div>'
+
+    function login() {
+        var name = $("#username").val();
+        var password = $("#inputPassword").val();
+        // xx()
+        request.post({
+                headers: {'content-type': 'application/x-www-form-urlencoded'},
+                url: 'http://localhost:9090/login',
+                form: {name: name, password: password}
+            },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body)
+                    if ("success" === body) {
+                        $("#alertMesg").html(suc);
+                        // xx()
+                    } else {
+                        $("#alertMesg").html(fai);
+                    }
+                }
+            })
+    }
+</script>
+
+</html>

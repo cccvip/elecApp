@@ -1,0 +1,11 @@
+directories:
+  output: dist
+  buildResources: build
+productName: appDemo
+appId: com.xiao.app
+win:
+  target:
+    - nsis
+    - zip
+  icon: assets/app.ico
+electronVersion: 4.0.0

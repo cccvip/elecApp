@@ -1,0 +1,30 @@
+{
+  "name": "elec",
+  "version": "0.0.1",
+  "description": "first",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "build": {
+    "productName": "appDemo",
+    "appId": "com.xiao.app",
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "assets/app.ico"
+    }
+  },
+  "author": "xiao",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.0.0",
+    "electron-builder": "^20.38.4"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
